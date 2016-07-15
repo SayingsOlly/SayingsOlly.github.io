@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Miner&amp;Learner</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://SayingsOlly.github.io/"/>
+  <updated>2016-07-14T17:14:45.000Z</updated>
+  <id>http://SayingsOlly.github.io/</id>
+  
+  <author>
+    <name>Yi Ou</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test categories</title>
+    <link href="http://SayingsOlly.github.io/2016/07/10/test-categories/"/>
+    <id>http://SayingsOlly.github.io/2016/07/10/test-categories/</id>
+    <published>2016-07-10T10:34:09.000Z</published>
+    <updated>2016-07-14T17:14:45.000Z</updated>
+    
+    <content type="html">&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;G&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=
+    
+    </summary>
+    
+      <category term="Data Mining" scheme="http://SayingsOlly.github.io/categories/DM/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Post test2</title>
+    <link href="http://SayingsOlly.github.io/2016/07/10/Post-test2/"/>
+    <id>http://SayingsOlly.github.io/2016/07/10/Post-test2/</id>
+    <published>2016-07-10T10:20:17.000Z</published>
+    <updated>2016-07-10T10:21:50.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Test 2&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Test 2&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://SayingsOlly.github.io/categories/ML/"/>
+    
+    
+      <category term="Machine Learning" scheme="http://SayingsOlly.github.io/tags/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Gallery</title>
+    <link href="http://SayingsOlly.github.io/2016/07/10/Gallery/"/>
+    <id>http://SayingsOlly.github.io/2016/07/10/Gallery/</id>
+    <published>2016-07-10T10:19:49.000Z</published>
+    <updated>2016-07-10T10:19:49.000Z</updated>
+    
+    <content type="html"></content>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>my new post</title>
+    <link href="http://SayingsOlly.github.io/2016/02/24/my-new-post/"/>
+    <id>http://SayingsOlly.github.io/2016/02/24/my-new-post/</id>
+    <published>2016-02-24T14:10:05.000Z</published>
+    <updated>2016-07-10T10:11:01.000Z</updated>
+    
+    <content type="html">&lt;p&gt;This is a test&lt;/p&gt;
+&lt;p&gt;\begin{equation}&lt;br&gt;\lambda&lt;br&gt;\end{equation}&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;This is a test&lt;/p&gt;
+&lt;p&gt;\begin{equation}&lt;br&gt;\lambda&lt;br&gt;\end{equation}&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="Data Mining" scheme="http://SayingsOlly.github.io/categories/DM/"/>
+    
+    
+      <category term="Data Mining" scheme="http://SayingsOlly.github.io/tags/Data-Mining/"/>
+    
+  </entry>
+  
+</feed>
