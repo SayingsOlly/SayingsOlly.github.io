@@ -70,7 +70,7 @@
     
     <div class="article-meta">
       <a href="/2016/07/16/Tree/" class="article-date">
-  <time datetime="2016-07-16T15:31:21.000Z" itemprop="datePublished">2016-07-16</time>
+  <time datetime="2016-07-17T05:31:21.000Z" itemprop="datePublished">2016-07-16</time>
 </a>
       
   <div class="article-category">
@@ -85,7 +85,22 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/16/Tree/segment.png" alt="Segment Tree"></p>
+        <p>Let me start with a usual problem:</p>
+<ol>
+<li>Assume we have an limit range array[0,1,…,n-1]. We should</li>
+</ol>
+<ul>
+<li>Get the sum range from i to j, which $i,j \in [0,n-1]$ and $i&lt;=j$.</li>
+<li>Update the elements.</li>
+</ul>
+<p>A brute force way is to solve by preprocessing the array, calculate and store sum range from $0$ to $i$, then we can get the sum range from i to j by calculate array[j] - array[i], in this way, the update time complexity would be O(n) on average, and the cost for getting the sum after update is O(1).</p>
+<p>But under certain circumstance, we may update a lot, can we do better than linear time?</p>
+<p>The answer is yes(if not, the article would be meaningless.), we can acheive an average time complexity O(logn) by using <strong>Segment Tree</strong>.</p>
+<p>Assume now we have an array [2,4,6,8,10], the tree will be,</p>
+<p><img src="images/segment.png" alt="Segment Tree"></p>
+<p>How to construct the segment tree?<br>We can start with the root, which is [0,1,…,n-1], then split it into halves until it reach the length 1. The left child of root will be [0,1,…(n-1)/2], and the right part will be [(n-1)/2+1,…n-1].</p>
+<p>Talk is cheap, here is the code.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SegmentTree</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">SegmentTreeNode</span></span>&#123;</span><br><span class="line">    	  SegmentTreeNode left, right;</span><br><span class="line">	  <span class="keyword">int</span> sum, start, end;</span><br><span class="line">	  <span class="function"><span class="keyword">public</span> <span class="title">SegmentTreeNode</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">	  	 sum = <span class="number">0</span>;</span><br><span class="line">		 <span class="keyword">this</span>.start = start;</span><br><span class="line">		 <span class="keyword">this</span>.end = end;</span><br><span class="line">	  &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    SegmentTreeNode root = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SegmentTree</span><span class="params">(<span class="keyword">int</span>[] array)</span></span>&#123;</span><br><span class="line">    	   root = constructTree(root, <span class="number">0</span>, array.length - <span class="number">1</span>, array);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> SegmentTreeNode <span class="title">constructTree</span><span class="params">(SegmentTreeNode cur, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span>[] array)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(l == r)&#123;</span><br><span class="line">	     cur = <span class="keyword">new</span> SegmentTreeNode(l, r);</span><br><span class="line">	     cur.sum = array[l];</span><br><span class="line">	     <span class="keyword">return</span> cur;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	     <span class="keyword">int</span> mid = l + (r-l)/<span class="number">2</span>;</span><br><span class="line">	     cur = <span class="keyword">new</span> SegmentTreeNode(l, r);</span><br><span class="line">	     cur.left = constructTree(cur.left, l, mid, array);</span><br><span class="line">	     cur.right = constructTree(cur.right, mid+<span class="number">1</span>, r, array);</span><br><span class="line">	     cur.sum = cur.left.sum + cur.right.sum;</span><br><span class="line">	     <span class="keyword">return</span> cur;</span><br><span class="line">	&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">    	root = update(root, i, value);   </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> SegmentTreeNode <span class="title">update</span><span class="params">(SegmentTreeNode cur, <span class="keyword">int</span> i, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(cur.start == cur.end)&#123;</span><br><span class="line">	    cur.sum = val;</span><br><span class="line">	    <span class="keyword">return</span> cur;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	    <span class="keyword">int</span> mid = cur.start + (cur.end - cur.start)/<span class="number">2</span>;</span><br><span class="line">	    <span class="keyword">if</span>(i&lt;=mid)&#123;</span><br><span class="line">		cur.left = update(cur.left, i, val);</span><br><span class="line">	    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		cur.right = update(cur.right, i, val);</span><br><span class="line">	    &#125;</span><br><span class="line">	    cur.sum = cur.left.sum + cur.right.sum;</span><br><span class="line">	    <span class="keyword">return</span> cur;</span><br><span class="line">	&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getSum(root, i, j);	   </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">(SegmentTreeNode cur, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(cur == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(cur.start == cur.end) <span class="keyword">return</span> cur.sum;</span><br><span class="line">	<span class="keyword">int</span> mid = cur.start + (cur.end - cur.start)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">if</span>(r&lt;=mid)&#123;</span><br><span class="line">	    <span class="keyword">return</span> getSum(cur.left, l, mid);</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(l&gt;mid)&#123;</span><br><span class="line">	    <span class="keyword">return</span> getSum(cur.right, mid+<span class="number">1</span>, r);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	    <span class="keyword">return</span> getSum(cur.left, l, mid) + getSum(cur.right, mid+<span class="number">1</span>, r);</span><br><span class="line">	&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -103,7 +118,7 @@
 
 
     
-      <article id="post-Post-test2" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-BinaryIndexTree" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -111,24 +126,24 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/10/Post-test2/">Post test2</a>
+      <a class="article-title" href="/2016/07/10/BinaryIndexTree/">Binary Index Tree</a>
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-      <a href="/2016/07/10/Post-test2/" class="article-date">
-  <time datetime="2016-07-10T10:20:17.000Z" itemprop="datePublished">2016-07-10</time>
+      <a href="/2016/07/10/BinaryIndexTree/" class="article-date">
+  <time datetime="2016-07-11T00:20:17.000Z" itemprop="datePublished">2016-07-10</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/ML/">Machine Learning</a>
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
   </div>
 
       
         <div class="article-comment-link-wrap">
-          <a href="/2016/07/10/Post-test2/#disqus_thread" class="article-comment-link">Comments</a>
+          <a href="/2016/07/10/BinaryIndexTree/#disqus_thread" class="article-comment-link">Comments</a>
         </div>
       
     </div>
@@ -142,7 +157,7 @@
     
       <footer class="article-footer">
         
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
 
       </footer>
     
